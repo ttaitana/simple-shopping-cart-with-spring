@@ -16,9 +16,14 @@ public class ProductControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @Test
-    public void getAllProductShouldReturnHello() {
-        String result = testRestTemplate.getForObject("/api/v1/product", String.class);
+    public void getAllProductShouldBe2ProductsWithTrainingBicycleAndDinnerSet() {
+        ProductResponse productBalanceTrainingBicycle = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
+        ProductResponse product43PieceDinnerSet = new ProductResponse(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
 
-        assertEquals("Hello", result);
+        ProductListResponse actualResult = testRestTemplate.getForObject("/api/v1/product", ProductListResponse.class);
+
+        assertEquals(2, actualResult.getTotal());
+        assertEquals(productBalanceTrainingBicycle, actualResult.getProducts().get(0));
+        assertEquals(product43PieceDinnerSet, actualResult.getProducts().get(1));
     }
 }
