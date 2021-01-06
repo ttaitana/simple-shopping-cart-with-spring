@@ -21,6 +21,6 @@ public class ProductController {
     }
 
     private ProductResponse createProductResponse(Product product) {
-        return new ProductResponse(product.getId(), product.getProductName(), product.getProductPrice(), product.getProductImage());
+        return new ProductResponse(product.getId(), product.getProductName(), product.getProductPrice(), product.getImageUrl());
     }
 }

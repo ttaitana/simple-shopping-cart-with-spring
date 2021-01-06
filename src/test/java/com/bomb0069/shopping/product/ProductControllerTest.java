@@ -59,13 +59,14 @@ public class ProductControllerTest {
 
         ProductResponse expectedProductBalanceTrainingBicycle = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
         ProductResponse expectedProduct43PieceDinnerSet = new ProductResponse(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
-        ProductResponse ExpectedProduct3 = new ProductResponse(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
+        ProductResponse expectedProduct3 = new ProductResponse(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
 
         ProductListResponse actualResult = testRestTemplate.getForObject("/api/v1/product", ProductListResponse.class);
 
         assertEquals(3, actualResult.getTotal());
         assertEquals(expectedProductBalanceTrainingBicycle, actualResult.getProducts().get(0));
         assertEquals(expectedProduct43PieceDinnerSet, actualResult.getProducts().get(1));
-        assertEquals(ExpectedProduct3, actualResult.getProducts().get(2));
+        assertEquals(expectedProduct3, actualResult.getProducts().get(2));
     }
+
 }
