@@ -16,14 +16,19 @@ public class ProductControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Autowired ProductRepository repository;
+    @Autowired
+    ProductRepository repository;
 
     Product productBalanceTrainingBicycle = new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
     Product product43PieceDinnerSet = new Product(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
     Product product3 = new Product(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
 
+    ProductResponse expectedProductBalanceTrainingBicycle = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
+    ProductResponse expectedProduct43PieceDinnerSet = new ProductResponse(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
+    ProductResponse expectedProduct3 = new ProductResponse(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
+
     @AfterEach
-    public void clearData () {
+    public void clearData() {
         repository.deleteAll();
     }
 
@@ -40,14 +45,11 @@ public class ProductControllerTest {
         repository.save(productBalanceTrainingBicycle);
         repository.save(product43PieceDinnerSet);
 
-        ProductResponse productBalanceTrainingBicycle = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
-        ProductResponse product43PieceDinnerSet = new ProductResponse(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
-
         ProductListResponse actualResult = testRestTemplate.getForObject("/api/v1/product", ProductListResponse.class);
 
         assertEquals(2, actualResult.getTotal());
-        assertEquals(productBalanceTrainingBicycle, actualResult.getProducts().get(0));
-        assertEquals(product43PieceDinnerSet, actualResult.getProducts().get(1));
+        assertEquals(expectedProductBalanceTrainingBicycle, actualResult.getProducts().get(0));
+        assertEquals(expectedProduct43PieceDinnerSet, actualResult.getProducts().get(1));
     }
 
 
@@ -57,10 +59,6 @@ public class ProductControllerTest {
         repository.save(product43PieceDinnerSet);
         repository.save(product3);
 
-        ProductResponse expectedProductBalanceTrainingBicycle = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
-        ProductResponse expectedProduct43PieceDinnerSet = new ProductResponse(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
-        ProductResponse expectedProduct3 = new ProductResponse(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
-
         ProductListResponse actualResult = testRestTemplate.getForObject("/api/v1/product", ProductListResponse.class);
 
         assertEquals(3, actualResult.getTotal());
@@ -69,4 +67,13 @@ public class ProductControllerTest {
         assertEquals(expectedProduct3, actualResult.getProducts().get(2));
     }
 
+    @Test
+    public void getProductId2ShouldBeReturnProduct43PieceDinnerSet() {
+        repository.save(product43PieceDinnerSet);
+
+        ProductResponse actualProduct = testRestTemplate.getForObject("/api/v1/product/2", ProductResponse.class);
+
+        assertEquals(expectedProduct43PieceDinnerSet, actualProduct);
+
+    }
 }

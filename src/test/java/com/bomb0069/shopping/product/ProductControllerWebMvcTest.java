@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
@@ -90,5 +91,67 @@ public class ProductControllerWebMvcTest {
         assertEquals(2, actual.getTotal());
         assertEquals(expectedFirstProduct, actual.getProducts().get(0));
         assertEquals(expectedSecondProduct, actual.getProducts().get(1));
+    }
+
+    @Test
+    public void getProductId1WithOnlyOneProductShouldBeReturnProductBalanceTrainingBicycle() throws Exception {
+        ProductResponse expectedFirstProduct = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
+
+        Optional<Product> productOptional = Optional.of(new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png"));
+
+        given(productRepository.findById(1)).willReturn(productOptional);
+
+        String response = this.mvc.perform(get("/api/v1/product/1"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        ProductResponse actual = mapper.readValue(response, ProductResponse.class);
+
+        assertEquals(expectedFirstProduct, actual);
+    }
+
+    @Test
+    public void getProductId1WithEmptyDatabaseShouldBeReturnProductErrorResponse() throws Exception {
+
+        ProductErrorResponse expectedError = new ProductErrorResponse(1);
+
+        Optional<Product> productOptional = Optional.empty();
+
+        given(productRepository.findById(1)).willReturn(productOptional);
+
+        String response = this.mvc.perform(get("/api/v1/product/1"))
+                .andExpect(status().isNotFound())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        ProductErrorResponse actual = mapper.readValue(response, ProductErrorResponse.class);
+
+        assertEquals(expectedError, actual);
+    }
+
+    @Test
+    public void getProductId2WithEmptyDatabaseShouldBeReturnProductErrorResponse() throws Exception {
+
+        ProductErrorResponse expectedError = new ProductErrorResponse(2);
+
+        Optional<Product> productOptional = Optional.empty();
+
+        given(productRepository.findById(1)).willReturn(productOptional);
+
+        String response = this.mvc.perform(get("/api/v1/product/2"))
+                .andExpect(status().isNotFound())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        ProductErrorResponse actual = mapper.readValue(response, ProductErrorResponse.class);
+
+        assertEquals(expectedError, actual);
     }
 }

@@ -67,4 +67,12 @@ public class ProductResponse {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "id: " + id + "\n"
+                + "productName: " + productName + "\n"
+                + "productPrice: " + productPrice + "\n"
+                + "productImage: " + productImage;
+    }
+
 }
