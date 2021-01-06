@@ -3,3 +3,4 @@
 ## Design
 
 - [API Specification](documents/design/api.md)
+- [Database Design Specification](documents/design/database.md)
