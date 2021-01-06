@@ -1,17 +1,20 @@
-
 package com.bomb0069.shopping.product;
 
-public class ProductResponse {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Product {
+    @Id
     private Integer id;
     private String productName;
     private Double productPrice;
     private String productImage;
 
-    public ProductResponse() {
+    public Product() {
     }
 
-    public ProductResponse(Integer id, String productName, Double productPrice, String productImage) {
+    public Product(Integer id, String productName, Double productPrice, String productImage) {
         this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -26,13 +29,6 @@ public class ProductResponse {
         this.id = id;
     }
 
-    public String getProductImage() {
-        return productImage;
-    }
-
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
-    }
 
     public String getProductName() {
         return productName;
@@ -50,21 +46,12 @@ public class ProductResponse {
         this.productPrice = productPrice;
     }
 
-    @Override
-    public boolean equals(Object product) {
+    public String getProductImage() {
+        return productImage;
+    }
 
-        if (product == this)
-            return true;
-
-        if (!(product instanceof ProductResponse))
-            return false;
-
-        ProductResponse productResponse = (ProductResponse)product;
-
-        if (productResponse.getId() == this.getId())
-            return true;
-
-        return false;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
 }

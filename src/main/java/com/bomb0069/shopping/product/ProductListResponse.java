@@ -12,6 +12,10 @@ public class ProductListResponse {
         return products.size();
     }
 
+    public void setTotal(Integer total) {
+
+    }
+
     public List<ProductResponse> getProducts() {
         return products;
     }

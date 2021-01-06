@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.PostConstruct;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -14,6 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ProductControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
+
+    @Autowired ProductRepository repository;
+
+    @PostConstruct
+    public void initialDataForTesting() {
+        Product productBalanceTrainingBicycle = new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
+        repository.save(productBalanceTrainingBicycle);
+        Product product43PieceDinnerSet = new Product(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
+        repository.save(product43PieceDinnerSet);
+    }
 
     @Test
     public void getAllProductShouldBe2ProductsWithTrainingBicycleAndDinnerSet() {

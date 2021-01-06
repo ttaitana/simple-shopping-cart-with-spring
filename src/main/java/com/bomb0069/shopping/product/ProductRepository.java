@@ -1,2 +1,8 @@
-package com.bomb0069.shopping.product;public class ProductRepository {
+package com.bomb0069.shopping.product;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Integer> {
 }

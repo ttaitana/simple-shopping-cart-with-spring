@@ -1,6 +1,7 @@
 package com.bomb0069.shopping.product;
 
-import org.junit.Test;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -8,11 +9,17 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ProductController.class)
-public class ProductTest {
+public class ProductControllerWebMvcTest {
 
     @MockBean
     ProductRepository productRepository;
@@ -22,8 +29,6 @@ public class ProductTest {
 
     @Test
     public void getAllProductWithEmptyDatabaseShouldBeEmptyList() throws Exception {
-        assertTrue(true);
-/*
         List<Product> products = new ArrayList<Product>();
 
         given(productRepository.findAll()).willReturn(products);
@@ -38,6 +43,5 @@ public class ProductTest {
         ProductListResponse actual = mapper.readValue(response, ProductListResponse.class);
 
         assertEquals(0, actual.getTotal());
-        assertEquals("", response);*/
     }
 }
