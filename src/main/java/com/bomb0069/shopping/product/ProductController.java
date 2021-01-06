@@ -17,7 +17,7 @@ public class ProductController {
     public ProductListResponse getAllProduct() {
         ProductListResponse productListResponse = new ProductListResponse();
         Iterable<Product> allProducts = productRepository.findAll();
-        for (Product product: allProducts) {
+        for (Product product : allProducts) {
             productListResponse.addProduct(createProductResponse(product));
         }
         return productListResponse;

@@ -1,4 +1,5 @@
 package com.bomb0069.shopping.product;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;

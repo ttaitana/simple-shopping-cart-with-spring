@@ -26,14 +26,14 @@ public class Product extends Audit<String> {
     @Override
     public String toString() {
         return "id: " + id + "\n"
-               + "productName :" + productName + "\n"
+                + "productName :" + productName + "\n"
                 + "productBrand: " + productBrand + "\n"
-                + "quantity: " + quantity  + "\n"
+                + "quantity: " + quantity + "\n"
                 + "productPrice: " + productPrice + "\n"
                 + "imageUrl: " + imageUrl + "\n"
                 + "created: " + created + "\n"
                 + "createdBy: " + created_By + "\n"
-                + "modified: " + modified  + "\n"
+                + "modified: " + modified + "\n"
                 + "modifiedBy: " + modified_By;
     }
 

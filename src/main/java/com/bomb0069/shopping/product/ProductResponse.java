@@ -59,7 +59,7 @@ public class ProductResponse {
         if (!(product instanceof ProductResponse))
             return false;
 
-        ProductResponse productResponse = (ProductResponse)product;
+        ProductResponse productResponse = (ProductResponse) product;
 
         if (productResponse.getId() == this.getId())
             return true;

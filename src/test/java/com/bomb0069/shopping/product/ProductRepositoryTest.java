@@ -25,7 +25,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void oneOfProductShouldBeReturnThat () {
+    public void oneOfProductShouldBeReturnThat() {
 
         productRepository.save(new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png"));
 
@@ -34,7 +34,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void twoOfProductShouldBeReturnAll () {
+    public void twoOfProductShouldBeReturnAll() {
 
         productRepository.save(new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png"));
         productRepository.save(new Product(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png"));

@@ -46,7 +46,7 @@ public class ProductErrorResponse {
         if (!(product instanceof ProductErrorResponse))
             return false;
 
-        ProductErrorResponse productResponse = (ProductErrorResponse)product;
+        ProductErrorResponse productResponse = (ProductErrorResponse) product;
 
         if (productResponse.getProductId() == this.getProductId())
             return true;
