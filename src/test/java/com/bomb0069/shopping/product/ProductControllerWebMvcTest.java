@@ -44,4 +44,51 @@ public class ProductControllerWebMvcTest {
 
         assertEquals(0, actual.getTotal());
     }
+
+    @Test
+    public void getAllProductWithOnlyOneProductShouldBeThatProduct() throws Exception {
+        ProductResponse expectedProduct = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
+
+        List<Product> products = new ArrayList<Product>();
+        products.add(new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png"));
+
+        given(productRepository.findAll()).willReturn(products);
+
+        String response = this.mvc.perform(get("/api/v1/product"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        ProductListResponse actual = mapper.readValue(response, ProductListResponse.class);
+
+        assertEquals(1, actual.getTotal());
+        assertEquals(expectedProduct, actual.getProducts().get(0));
+    }
+
+    @Test
+    public void getAllProductWithMoreThanOneProductShouldBeReturnAllOfThat() throws Exception {
+        ProductResponse expectedFirstProduct = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
+        ProductResponse expectedSecondProduct = new ProductResponse(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
+
+        List<Product> products = new ArrayList<Product>();
+        products.add(new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png"));
+        products.add(new Product(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png"));
+
+        given(productRepository.findAll()).willReturn(products);
+
+        String response = this.mvc.perform(get("/api/v1/product"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        ProductListResponse actual = mapper.readValue(response, ProductListResponse.class);
+
+        assertEquals(2, actual.getTotal());
+        assertEquals(expectedFirstProduct, actual.getProducts().get(0));
+        assertEquals(expectedSecondProduct, actual.getProducts().get(1));
+    }
 }
