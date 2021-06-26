@@ -1,7 +1,7 @@
 # API Specification
 ## API Product list
 ### คำอธิบาย
-สำหรับไว้แสดงรายการสินค้า01
+สำหรับไว้แสดงรายการสินค้า
 
 ### URL: /api/v1/product
 ### METHOD: GET
